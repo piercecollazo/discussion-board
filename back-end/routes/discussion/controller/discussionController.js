@@ -18,10 +18,10 @@ module.exports = {
 
   },
 
-  createDiscussion: async (req, res) => {
+  createPost: async (req, res) => {
     console.log(req.body.id)
     let id = req.body.id;
-    let discussion = req.body.discussion;
+    let post = req.body.post;
     let title = req.body.title;
     let image = req.body.image;
 
@@ -29,19 +29,21 @@ module.exports = {
       let foundUser = await User.findById(id);
       let newDiscussion = await new Discussion({
         title: title,
-        discussion: discussion,
+        post: post,
         image: image, 
         user_id: id
       });
       let savedNewDiscussion = await newDiscussion.save();
-      await foundUser.Discussions.push(savedNewDiscussion);
+      await foundUser.discussions.push(savedNewDiscussion);
       await foundUser.save(); 
       res.status(200).json(savedNewDiscussion);
     } catch (error) {
+        console.log(error)
       res.status(500).json(error);
     }
   },
-  getDiscussionByID: async (req, res) => {
+
+  getDiscussionByCategoryID: async (req, res) => {
     const id = req.params.id; 
     try {
       let foundDiscussion = await Discussion.findById({_id: id});
@@ -52,6 +54,20 @@ module.exports = {
     }
 
   },
+  deleteByPost: async (req, res) => {
+    const id = req.params.postId;
+
+    try {
+      let deletedByPost = await Post.findByIdAndRemove(id);
+
+      res.status(200).json(deletedByPost)
+
+    } catch (error) {
+      console.log(error)
+      res.status(500).json(error);
+    }
+  },
+
   deleteByID: async (req, res) => {
     const id = req.params.id;
 
@@ -66,14 +82,15 @@ module.exports = {
     }
 
   },
+  
   getAllUserDiscussions: async (req, res) => {
 
     const id = req.params.id;
 
     try {
-      let allUserDiscussions = await User.findById({_id: id}).populate('discussions').exec();
+      let allUserPost = await User.findById({_id: id}).populate('posts').exec();
 
-      res.status(200).json(allUserDiscussions.discussions)
+      res.status(200).json(allUserPost.posts)
 
     } catch (error) {
       console.log(error)

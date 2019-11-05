@@ -5,7 +5,7 @@ const now = moment();
 
 const DiscussionSchema = new mongoose.Schema({
   title: { type:String, default: ''},
-  discussion: {type: String, default: ''},
+  post: { type: Array, default: ''},
   image: { type: String, default: ''},
   user_id:{
     type:Schema.Types.ObjectId, ref:'User'

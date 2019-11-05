@@ -3,11 +3,25 @@ var router = express.Router();
 var passport = require('passport');
 var discussionController = require('./controller/discussionController')
 /* GET home page. */
-router.get('/get-all-discussions', discussionController.getAllDiscussions);
 
-router.post('/create-discussion', passport.authenticate('jwt', { session: false }), discussionController.createDiscussion);
+// .get route for catogeries (separate routes)
 
-router.get('/get-discussion-by-id/:id', passport.authenticate('jwt', { session: false }), discussionController.getDiscussionByID);
+// .get routes to pull all topics  individually and all posts within.
+
+router.get('/category/:ID', function(req, res, next) {
+    res.send('CATOGARIES');
+  });
+
+//   router.post('/category/Topic/:ID', function(req, res, next) {
+//     res.send('Topic');
+//   });
+ 
+
+// router.get('/get-all-discussions/:ID', discussionController.getAllDiscussions);
+
+router.post('/create-post', passport.authenticate('jwt', { session: false }), discussionController.createPost);
+
+router.get('/get-discussion-by-category/:id',  discussionController.getDiscussionByCategoryID);
 
 router.get('/get-all-user-discussions/:id', passport.authenticate('jwt', { session: false }), discussionController.getAllUserDiscussions)
 
