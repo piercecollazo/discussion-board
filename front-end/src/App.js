@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
+import Navbar from './Components/Core/Navbar';
+import Header from './Components/Core/Header'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const Signin = React.lazy(() => import('./Components/Core/Signin'));
+const Home = React.lazy(() => import('./Components/Core/Home'));
+const Signup = React.lazy(() => import('./Components/Core/Signup'));
+const NotFound = React.lazy(() => import('./Components/Core/NotFound'))
+
+export default class App extends Component {
+  render() {
+    return (
+      <>  
+        <Header />
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/sign-up' component={Signup} />
+          <Route exact path='/sign-in' component={Signin} />
+
+          <Route path='' component={NotFound} />
+        </Switch>
+      </>
+    )
+  }
 }
-
-export default App;
