@@ -42,18 +42,7 @@ module.exports = {
       res.status(500).json(error);
     }
   },
-
-  getDiscussionByCategoryID: async (req, res) => {
-    const id = req.params.id; 
-    try {
-      let foundDiscussion = await Discussion.findById({_id: id});
-      res.status(200).json(foundDiscussion);
-    } catch (error) {
-      console.log(error)
-      res.status(500).json(error);
-    }
-
-  },
+  
   deleteByPost: async (req, res) => {
     const id = req.params.postId;
 

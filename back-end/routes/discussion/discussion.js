@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var discussionController = require('./controller/discussionController')
+var categoryController = require('../category/categoryController/categoryController')
 /* GET home page. */
 
 // .get route for catogeries (separate routes)
@@ -21,7 +22,10 @@ router.get('/category/:ID', function(req, res, next) {
 
 router.post('/create-post', passport.authenticate('jwt', { session: false }), discussionController.createPost);
 
-router.get('/get-discussion-by-category/:id',  discussionController.getDiscussionByCategoryID);
+router.get('/get-discussion-by-all-category/:id',  categoryController.getDiscussionByAllCategoryID);
+router.get('/get-discussion-by-category-politics/:id',  categoryController.getDiscussionByCategoryPoliticsID);
+router.get('/get-discussion-by-category-general/:id',  categoryController.getDiscussionByCategoryGeneralID);
+router.get('/get-discussion-by-category-sports/:id',  categoryController.getDiscussionByCategorySportsID);
 
 router.get('/get-all-user-discussions/:id', passport.authenticate('jwt', { session: false }), discussionController.getAllUserDiscussions)
 
