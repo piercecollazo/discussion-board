@@ -22,10 +22,8 @@ router.get('/category/:ID', function(req, res, next) {
 
 router.post('/create-post', passport.authenticate('jwt', { session: false }), discussionController.createPost);
 
-router.get('/get-discussion-by-all-category/:id',  categoryController.getDiscussionByAllCategoryID);
-router.get('/get-discussion-by-category-politics/:id',  categoryController.getDiscussionByCategoryPoliticsID);
-router.get('/get-discussion-by-category-general/:id',  categoryController.getDiscussionByCategoryGeneralID);
-router.get('/get-discussion-by-category-sports/:id',  categoryController.getDiscussionByCategorySportsID);
+router.get('/get-discussion-by-category/:id',  categoryController.getDiscussionByCategoryID);
+
 
 router.get('/get-all-user-discussions/:id', passport.authenticate('jwt', { session: false }), discussionController.getAllUserDiscussions)
 
