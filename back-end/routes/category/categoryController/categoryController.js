@@ -46,6 +46,18 @@ getDiscussionByCategoryID: async (req, res) => {
     }
   },
 
+  getCategoryByID: async (req, res) => {
+    const id = req.params.id; 
+    try {
+      let foundCategory = await Category.findById({_id: id});
+      res.status(200).json(foundCategory);
+    } catch (error) {
+      console.log(error)
+      res.status(500).json(error);
+    }
+
+  },
+
   createTopic: async (req, res) => {
         let categoryID = req.body.category_id;
         let user_id = req.body.userId;
@@ -78,7 +90,7 @@ getDiscussionByCategoryID: async (req, res) => {
     }
   },
 
-  getDiscussionByCategoryTopic: async (req, res) => {
+  getDiscussionByTopic: async (req, res) => {
     const id = req.params.id; 
     try {
       let foundCategoryTopic = await Topic.findById({_id: id});

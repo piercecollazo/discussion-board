@@ -3,20 +3,20 @@ const User = require('../../users/model/User');
 
 module.exports = {
 
-  getAllDiscussions: async (req, res) => {
+//   getAllDiscussions: async (req, res) => {
 
-    try {
-      let allDiscussions = await Discussion.find({})
+//     try {
+//       let allDiscussions = await Discussion.find({})
       
-      res.status(200).json(allDiscussions);                 
+//       res.status(200).json(allDiscussions);                 
 
-    } catch (error) {
-      console.log(error);
-      res.status(500).json(error);
-    }
+//     } catch (error) {
+//       console.log(error);
+//       res.status(500).json(error);
+//     }
 
 
-  },
+//   },
 
 //   createPost: async (req, res) => {
 //     console.log(req.body.id)
@@ -61,7 +61,7 @@ module.exports = {
     const id = req.params.id;
 
     try {
-      let deletedByID = await Discussion.findByIdAndRemove(id);
+      let deletedByID = await Topic.findByIdAndRemove(id);
 
       res.status(200).json(deletedByID)
 
@@ -72,14 +72,14 @@ module.exports = {
 
   },
   
-  getAllUserDiscussions: async (req, res) => {
+  getAllUserDiscussionPosts: async (req, res) => {
 
     const id = req.params.id;
 
     try {
-      let allUserPost = await User.findById({_id: id}).populate('posts').exec();
+      let allUserPost = await User.findById({_id: id}).populate('topics').exec();
 
-      res.status(200).json(allUserPost.posts)
+      res.status(200).json(allUserPost.topics)
 
     } catch (error) {
       console.log(error)

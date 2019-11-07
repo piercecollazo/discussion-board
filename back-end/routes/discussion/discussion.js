@@ -5,10 +5,6 @@ var discussionController = require('./controller/discussionController')
 var categoryController = require('../category/categoryController/categoryController')
 /* GET home page. */
 
-// .get route for catogeries (separate routes)
-
-// .get routes to pull all topics  individually and all posts within.
-
 
 // router.post('/create-post', passport.authenticate('jwt', { session: false }), discussionController.createPost);
 
@@ -16,8 +12,12 @@ router.post('/create-category', categoryController.createCategory);
 
 router.post('/create-topic',  categoryController.createTopic);
 
-router.get('/get-all-user-discussions/:id', discussionController.getAllUserDiscussions)
+router.get('/get-category-by-id/:id', categoryController.getCategoryByID);
 
-// router.delete('/delete-by-id/:id', passport.authenticate('jwt', { session: false }), discussionController.deleteByID)
+router.get('/get-discussion-topic-by-id/:id', categoryController.getDiscussionByTopic);
+
+router.get('/get-all-user-discussionPosts/:id', discussionController.getAllUserDiscussionPosts)
+
+router.delete('/delete-by-id/:id', passport.authenticate('jwt', { session: false }), discussionController.deleteByID)
 
 module.exports = router;
