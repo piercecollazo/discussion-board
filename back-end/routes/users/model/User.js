@@ -5,7 +5,8 @@ const now = moment();
 var UserSchema = new mongoose.Schema({
     username: {type: String,trim: true, unique: true, required: true, default: ''},
     email: {type: String, trim: true, unique: true, required: true, default: ''},
-    discussions: [{ type: mongoose.Schema.Types.ObjectId, ref:'Discussion' }],
+    categories: [{ type: mongoose.Schema.Types.ObjectId, ref:'Category' }],
+
     password: {type: String, default: ''},
     timestamp: {type: String, default: now.format("dddd, MMMM Do YYYY, h:mm:ss a")}
 });
