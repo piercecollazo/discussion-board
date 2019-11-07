@@ -16,8 +16,8 @@ router.post('/create-category', categoryController.createCategory);
 
 router.post('/create-topic',  categoryController.createTopic);
 
-router.get('/get-all-user-discussions/:id', passport.authenticate('jwt', { session: false }), discussionController.getAllUserDiscussions)
+router.get('/get-all-user-discussions/:id', discussionController.getAllUserDiscussions)
 
-router.delete('/delete-by-id/:id', passport.authenticate('jwt', { session: false }), discussionController.deleteByID)
+// router.delete('/delete-by-id/:id', passport.authenticate('jwt', { session: false }), discussionController.deleteByID)
 
 module.exports = router;
