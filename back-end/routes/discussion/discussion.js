@@ -6,7 +6,7 @@ var categoryController = require('../category/categoryController/categoryControl
 /* GET home page. */
 
 
-// router.post('/create-post', passport.authenticate('jwt', { session: false }), discussionController.createPost);
+router.post('/create-post', discussionController.createPost);
 
 router.post('/create-category', categoryController.createCategory);
 

@@ -1,9 +1,9 @@
-const Discussion = require('../model/Discussion');
+const Post = require('../../category/Post');
 const User = require('../../users/model/User');
 
 module.exports = {
 
-//   getAllDiscussions: async (req, res) => {
+//   getAllDiscussions: async (req, res) => { 
 
 //     try {
 //       let allDiscussions = await Discussion.find({})
@@ -18,44 +18,44 @@ module.exports = {
 
 //   },
 
-//   createPost: async (req, res) => {
-//     console.log(req.body.id)
-//     let id = req.body.id;
-//     let post = req.body.post;
-//     let title = req.body.title;
-//     let image = req.body.image;
+  createPost: async (req, res) => {
+    console.log(req.body.id)
+    let id = req.body.id;
+    let post = req.body.post;
+    let title = req.body.title;
+    let image = req.body.image;
 
-//     try { 
-//       let foundUser = await User.findById(id);
-//       let newDiscussion = await new Discussion({
-//         title: title,
-//         post: post,
-//         image: image, 
-//         user_id: id
-//       });
-//       let savedNewDiscussion = await newDiscussion.save();
-//       await foundUser.discussions.push(savedNewDiscussion);
-//       await foundUser.save(); 
-//       res.status(200).json(savedNewDiscussion);
-//     } catch (error) {
-//         console.log(error)
-//       res.status(500).json(error);
-//     }
-//   },
-  
-  deleteByPost: async (req, res) => {
-    const id = req.params.postId;
-
-    try {
-      let deletedByPost = await Post.findByIdAndRemove(id);
-
-      res.status(200).json(deletedByPost)
-
+    try { 
+      let foundTopic = await Topic.findById(id);
+      let newPost = await new Post({
+        title: title,
+        post: post,
+        image: image, 
+        user_id: id
+      });
+      let savedNewPost = await newPost.save();
+      await foundTopic.posts.push(savedNewPost);
+      await foundTopic.save(); 
+      res.status(200).json(savedNewPost);
     } catch (error) {
-      console.log(error)
+        console.log(error)
       res.status(500).json(error);
     }
   },
+  
+//   deleteByPost: async (req, res) => {
+//     const id = req.params.postId;
+
+//     try {
+//       let deletedByPost = await Post.findByIdAndRemove(id);
+
+//       res.status(200).json(deletedByPost)
+
+//     } catch (error) {
+//       console.log(error)
+//       res.status(500).json(error);
+//     }
+//   },
 
   deleteByID: async (req, res) => {
     const id = req.params.id;

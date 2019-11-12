@@ -2,12 +2,10 @@ const mongoose = require('mongoose');
 const moment = require("moment");
 const now = moment();
 
-let TopicSchema = mongoose.Schema({
+let PostSchema = mongoose.Schema({
     
     user_id: {type: mongoose.SchemaTypes.ObjectId, ref: "User"}, 
-    category_id: {type: mongoose.SchemaTypes.ObjectId, ref: "Category"}, 
-    
-    title: { type: String, unique: true, required: true, default: ''},
+    title:{type: String, default:''},
     post: [{type: mongoose.SchemaTypes.ObjectId, ref: 'Post'}],
     image: { type: String, default: ''},
     timestamp: {
@@ -16,4 +14,4 @@ let TopicSchema = mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('Topic', TopicSchema)
+module.exports = mongoose.model('Post', PostSchema)
