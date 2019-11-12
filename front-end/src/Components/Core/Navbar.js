@@ -21,7 +21,8 @@ const styles = {
     },
     activeLinks: {
         color: 'white',
-        textDecoration: 'underline white'
+        textDecoration: 'underline white',
+        marginLeft: 'auto'
     }
 }
 
@@ -52,7 +53,7 @@ class Navbar extends Component {
                         to='/'
                         className={[this.props.classes.navLinkStyle, this.props.classes.signupAndSignin].join(' ')}
                         activeStyle={{color: 'white', textDecoration: 'underline white'}}
-                        onClick={this.handleLogout}
+                        onClick={this.logout}
                     >
                         Log Out
                     </NavLink>
@@ -90,7 +91,22 @@ class Navbar extends Component {
                      to='/'
                      className={this.props.classes.navLinkStyle}
                      activeStyle={styles.activeLinks}
-                     >Discussion Board</NavLink>
+                     >General</NavLink>
+
+                    <NavLink 
+                     exact
+                     to='/'
+                     className={this.props.classes.navLinkStyle}
+                     activeStyle={styles.activeLinks}
+                     >Politics</NavLink>
+
+                    <NavLink 
+                     exact
+                     to='/'
+                     className={this.props.classes.navLinkStyle}
+                     activeStyle={styles.activeLinks}
+                     >Sports</NavLink>
+                     
 
                      <section className={this.props.classes.rightToolbar}>
                         
