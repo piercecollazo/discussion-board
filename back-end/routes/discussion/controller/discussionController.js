@@ -1,5 +1,6 @@
 const Post = require('../../category/Post');
 const User = require('../../users/model/User');
+const Topic = require('../../category/Topic');
 
 module.exports = {
 
@@ -80,6 +81,22 @@ module.exports = {
       let allUserPost = await User.findById({_id: id}).populate('topics').exec();
 
       res.status(200).json(allUserPost.topics)
+
+    } catch (error) {
+      console.log(error)
+      res.status(500).json(error);
+    }
+
+  },
+
+  getAllPostsByTopic: async (req, res) => {
+
+    const id = req.params.id;
+
+    try {
+      let allPosts = await Topic.findById({_id: id}).populate('post').exec();
+
+      res.status(200).json(allPosts)
 
     } catch (error) {
       console.log(error)

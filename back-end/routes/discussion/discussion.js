@@ -12,7 +12,7 @@ router.post('/create-category', categoryController.createCategory);
 
 router.post('/create-topic',  categoryController.createTopic);
 
-router.get('/get-category-by-id/:id', categoryController.getCategoryByID);
+router.get('/get-all-category-by-id/:id', categoryController.getAllCategoryByID);
 
 router.get('/get-discussion-topic-by-id/:id', categoryController.getDiscussionByTopic);
 
