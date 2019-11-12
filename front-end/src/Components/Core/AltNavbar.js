@@ -32,6 +32,13 @@ const useStyles = makeStyles(theme => ({
       display: 'block',
     },
   },
+  category: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+    marginLeft: theme.spacing(10)
+  },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -188,6 +195,18 @@ function Navbar() {
           <Typography className={classes.title} variant="h6" noWrap>
             Discussion Board
           </Typography>
+
+          <Typography className={classes.category} variant="h6" noWrap>
+            General
+          </Typography>
+
+          <Typography className={classes.category} variant="h6" noWrap>
+            Politics
+          </Typography>
+
+          <Typography className={classes.category} variant="h6" noWrap>
+            Sports
+          </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -245,7 +264,8 @@ function Navbar() {
 
 const mapStateToProps = state => {
     return {
-        authUser: state.authUser
+        authUser: state.authUser,
+        forumData: state.forumData
     }
 }
 
