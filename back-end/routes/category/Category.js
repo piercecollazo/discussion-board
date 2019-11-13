@@ -6,7 +6,7 @@ let CategorySchema = mongoose.Schema({
     
       user_id: { type: mongoose.SchemaTypes.ObjectId, ref: "User"}, 
       
-      categoryName: { type: String, default: ''},
+      categoryName: [{ type: String, default: ''}],
 
       topics: [{ type: mongoose.Schema.Types.ObjectId, ref:'Topic' }],
 
