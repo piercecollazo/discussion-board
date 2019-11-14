@@ -1,21 +1,24 @@
 const Post = require('../../category/Post');
 const User = require('../../users/model/User');
 const Topic = require('../../category/Topic');
+const Category = require('../../category/Category')
 
 module.exports = {
   createTopic: async (req, res) => {
     let categoryId = req.params.catId
     let userId = req.params.userId
     try{
-      let foundCategory = Category.findById()
+      console.log('-----createTopic fired------')
+      let foundCategory = await Category.findById(categoryId)
       let newTopic = await new Topic({
         user_id: userId,
         category_id: categoryId,
-        title: req.body.title,
+        title: req.body.title
       })
-      let savedTopic = newTopic.save()
+      let savedTopic = await newTopic.save()
       await foundCategory.topics.push(savedTopic)
       await foundCategory.save()
+      res.status(200).json(savedTopic)
     } catch(error){
       res.status(500).json(error);
     }

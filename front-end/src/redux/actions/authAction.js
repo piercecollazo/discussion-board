@@ -30,7 +30,7 @@ export const signin = (userInfo) => async dispatch => {
 
 export const categoryList = ()=> async dispatch => {
     try{
-        let success = await Axios.post('/category/get-all-category')
+        let success = await Axios.get('/discussion/get-all-category')
         dispatch({
             type: CATEGORY_LIST_FILL,
             payload: success
@@ -42,19 +42,46 @@ export const categoryList = ()=> async dispatch => {
 
 export const topicList = (categoryId)=> async dispatch => {
     try{
-        let success = await Axios.post(`/category/get-all-topics/${categoryId}`)
+        console.log('topicList fired')
+        let success = await Axios.get(`/discussion/get-all-topics/${categoryId}`)
+        console.log(success.data.topics)
         dispatch({
             type: TOPIC_LIST_FILL,
+            payload: success.data.topics
+        })
+        return Promise.resolve()
+    }catch (error){
+        return Promise.reject(error);
+    }
+}
+
+export const createTopic = (categoryId, userId, name) => async dispatch => {
+    try {
+        let success = await Axios.post(`/discussion/create-topic/${categoryId}/${userId}`, {title: name})
+        dispatch({
+            type: CREATE_TOPIC,
             payload: success
         })
-    }catch (error){
+    } catch(error){
+        return Promise.reject(error);
+    }
+}
+
+export const createPost = (topicId, userId, post) => async dispatch => {
+    try {
+        let success = await Axios.post(`/discussion/create-post/${topicId}/${userId}`, {content: post})
+        dispatch({
+            type: CREATE_POST,
+            payload: success
+        })
+    } catch(error){
         return Promise.reject(error);
     }
 }
 
 export const postList = (topicId)=> async dispatch => {
     try{
-        let success = await Axios.post(`/category/get-all-posts/${topicId}`)
+        let success = await Axios.get(`/discussion/get-all-posts/${topicId}`)
         dispatch({
             type: POST_LIST_FILL,
             payload: success

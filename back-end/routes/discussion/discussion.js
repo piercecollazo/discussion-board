@@ -10,11 +10,11 @@ router.post('/create-post/:topicId/:userId', discussionController.createPost);
 
 router.post('/create-category', categoryController.createCategory);
 
-router.post('/create-topic/:catId/:userId',  categoryController.createTopic);
+router.post('/create-topic/:catId/:userId',  discussionController.createTopic);
 
 router.get('/get-all-category', categoryController.getAllCategory);
 
-router.get('/get-all-topics/:id', categoryController.getDiscussionByTopic);
+router.get('/get-all-topics/:id', categoryController.getTopicsByCategory);
 
 router.get('/get-all-posts/:id', discussionController.getAllUserDiscussionPosts)
 

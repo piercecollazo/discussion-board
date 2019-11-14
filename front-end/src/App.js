@@ -19,7 +19,7 @@ export default class App extends Component {
   render() {
     return (
       <>  
-        <AltNavbar />
+        <Navbar />
         <Switch>
           <Route exact path='/' component={General} />
           <Route exact path='/politics' component={Politics} />

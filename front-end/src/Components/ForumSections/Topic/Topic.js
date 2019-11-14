@@ -4,6 +4,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import TablePagination from "@material-ui/core/TablePagination";
+import {postList} from '../../../redux/actions/authAction'
 
 
 class Topic extends Component {
@@ -14,8 +15,7 @@ class Topic extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props)
-        this.props.getAllPosts()
+        this.props.postList(this.props.location.params.id)
             .then(()=>{
                 this.setState({
                     loading: false
@@ -35,7 +35,7 @@ class Topic extends Component {
                 <List>
                   {this.props.forumData.posts.map((item)=>{
                     return(
-                    <ListItem >
+                    <ListItem key={item._id}>
                       <ListItemText primary={item.content} />
                     </ListItem>
                     )
@@ -62,4 +62,4 @@ const mapStateToProps = state => {
     }
   }
   
-  export default connect(mapStateToProps, null)(Topic);
+  export default connect(mapStateToProps, {postList})(Topic);

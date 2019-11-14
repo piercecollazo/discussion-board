@@ -80,11 +80,12 @@ getAllCategory: async (req, res) => {
     }
   },
 
-  getDiscussionByTopic: async (req, res) => {
+  getTopicsByCategory: async (req, res) => {
     const id = req.params.id; 
     try {
-      let foundCategoryTopic = await Topic.findById({_id: id});
-      res.status(200).json(foundCategoryTopic);
+      let foundTopics = await Category.findById({_id: id}).populate('topics').exec();
+      
+      res.status(200).json(foundTopics);
     } catch (error) {
       console.log(error)
       res.status(500).json(error);

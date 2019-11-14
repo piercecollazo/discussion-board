@@ -14,7 +14,8 @@ const styles = {
     },
     navLinkStyle: {
         textDecoration: 'none',
-        color: 'white'
+        color: 'white',
+        marginRight: 10
     },
     signupAndSignin: {
         marginLeft: '10px'
@@ -95,14 +96,14 @@ class Navbar extends Component {
 
                     <NavLink 
                      exact
-                     to='/'
+                     to='/politics'
                      className={this.props.classes.navLinkStyle}
                      activeStyle={styles.activeLinks}
                      >Politics</NavLink>
 
                     <NavLink 
                      exact
-                     to='/'
+                     to='/sports'
                      className={this.props.classes.navLinkStyle}
                      activeStyle={styles.activeLinks}
                      >Sports</NavLink>
