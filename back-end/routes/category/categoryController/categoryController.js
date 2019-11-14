@@ -49,37 +49,37 @@ getAllCategoryByID: async (req, res) => {
   },
 
 
-  createTopic: async (req, res) => {
-        let categoryID = req.body.category_id;
-        let user_id = req.body.userId;
-        let title = req.body.title;
-        let post = req.body.post;
-        let image = req.body.image;
+//   createTopic: async (req, res) => {
+//         let categoryID = req.body.category_id;
+//         let user_id = req.body.userId;
+//         let title = req.body.title;
+//         let post = req.body.post;
+//         let image = req.body.image;
     
 
-    try { 
-      let foundCategory = await Category.findById(categoryID);
+//     try { 
+//       let foundCategory = await Category.findById(categoryID);
 
-      let newTopic = await new Topic({
-        title: title,
-        post: post,
-        image: image, 
-        user_id: user_id,
-        category_id: categoryID
-      });
+//       let newTopic = await new Topic({
+//         title: title,
+//         post: post,
+//         image: image, 
+//         user_id: user_id,
+//         category_id: categoryID
+//       });
 
-      let savedTopic = await newTopic.save();
+//       let savedTopic = await newTopic.save();
    
       
-      await foundCategory.topics.push(savedTopic);
+//       await foundCategory.topics.push(savedTopic);
      
-      await foundCategory.save(); 
-      res.status(200).json(savedTopic);
-    } catch (error) {
-        console.log(error)
-      res.status(500).json(error);
-    }
-  },
+//       await foundCategory.save(); 
+//       res.status(200).json(savedTopic);
+//     } catch (error) {
+//         console.log(error)
+//       res.status(500).json(error);
+//     }
+//   },
 
   getDiscussionByTopic: async (req, res) => {
     const id = req.params.id; 
