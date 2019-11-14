@@ -16,6 +16,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { withStyles } from '@material-ui/styles';
+import {withRouter} from 'react-router-dom'
 
 
 
@@ -31,6 +32,13 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+  },
+  category: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+    marginLeft: theme.spacing(10)
   },
   search: {
     position: 'relative',
@@ -81,7 +89,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Navbar() {
+function Navbar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -106,6 +114,16 @@ function Navbar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const signUp = () =>{
+    handleMenuClose()
+    props.history.push('/sign-up')
+  }
+
+  const signIn = ()=>{ 
+    handleMenuClose()
+    props.history.push('/sign-in')
+  }
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -118,15 +136,15 @@ function Navbar() {
       onClose={handleMenuClose}
     >
         {/* Placeholder for the authentication check to change the dropdown menu of the user icon */}
-        {1+1 == 3 ? 
+        {1+1 === 3 ? 
         <div>
             <MenuItem onClick={handleMenuClose}>Account</MenuItem>
             <MenuItem onClick={handleMenuClose}>Log out</MenuItem>
         </div>
         :
         <div>
-            <MenuItem onClick={()=>{console.log(this.props)}}>Sign up</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Sign in</MenuItem>
+            <MenuItem onClick={signUp}>Sign up</MenuItem>
+            <MenuItem onClick={signIn}>Sign in</MenuItem>
         </div>
         }
     </Menu>
@@ -188,6 +206,18 @@ function Navbar() {
           <Typography className={classes.title} variant="h6" noWrap>
             Discussion Board
           </Typography>
+
+          <Typography className={classes.category} variant="h6" noWrap>
+            General
+          </Typography>
+
+          <Typography className={classes.category} variant="h6" noWrap>
+            Politics
+          </Typography>
+
+          <Typography className={classes.category} variant="h6" noWrap>
+            Sports
+          </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -245,8 +275,9 @@ function Navbar() {
 
 const mapStateToProps = state => {
     return {
-        authUser: state.authUser
+        authUser: state.authUser,
+        forumData: state.forumData
     }
 }
 
-export default connect(mapStateToProps, null)(withStyles(useStyles)(Navbar));
+export default connect(mapStateToProps, null)(withStyles(useStyles)(withRouter(Navbar)));

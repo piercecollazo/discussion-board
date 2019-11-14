@@ -5,10 +5,9 @@ const Topic = require('../Topic');
 
 module.exports = {
 
-getAllCategoryByID: async (req, res) => {
-    const id = req.params.id; 
+getAllCategory: async (req, res) => {
     try {
-      let foundCategory = await Category.findById({_id: id}).populate('categoryName').exec();
+      let foundCategory = await Category.find({})
 
       res.status(200).json(foundCategory)
 
