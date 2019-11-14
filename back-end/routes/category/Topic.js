@@ -6,10 +6,8 @@ let TopicSchema = mongoose.Schema({
     
     user_id: {type: mongoose.SchemaTypes.ObjectId, ref: "User"}, 
     category_id: {type: mongoose.SchemaTypes.ObjectId, ref: "Category"}, 
-    
     title: { type: String, unique: true, required: true, default: ''},
     post: [{type: mongoose.SchemaTypes.ObjectId, ref: 'Post'}],
-    image: { type: String, default: ''},
     timestamp: {
         type: String, default: now.format("dddd, MMMM Do YYYY, kk:mm:ss")
       },

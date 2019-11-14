@@ -12,7 +12,7 @@ class General extends Component {
                 <List>
                   {this.props.forumData.topics.map((item)=>{
                     return(
-                    <ListItem>
+                    <ListItem href='/topic/:id'>
                       <ListItemText primary={item.title} />
                     </ListItem>
                     )

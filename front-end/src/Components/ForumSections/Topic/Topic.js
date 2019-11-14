@@ -8,10 +8,13 @@ import TablePagination from "@material-ui/core/TablePagination";
 
 class Topic extends Component {
     state = {
-        loading: true
+        loading: true,
+        post:'',
+        submitted: false
     }
 
     componentDidMount(){
+        console.log(this.props)
         this.props.getAllPosts()
             .then(()=>{
                 this.setState({
@@ -32,9 +35,8 @@ class Topic extends Component {
                 <List>
                   {this.props.forumData.posts.map((item)=>{
                     return(
-                    <ListItem href='/#'>
-                      <ListItemText primary={item.title} />
-                      <ListItemText primary={item.title} />
+                    <ListItem >
+                      <ListItemText primary={item.content} />
                     </ListItem>
                     )
                   })}

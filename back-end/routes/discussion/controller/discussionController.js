@@ -3,36 +3,36 @@ const User = require('../../users/model/User');
 const Topic = require('../../category/Topic');
 
 module.exports = {
-
-//   getAllDiscussions: async (req, res) => { 
-
-//     try {
-//       let allDiscussions = await Discussion.find({})
-      
-//       res.status(200).json(allDiscussions);                 
-
-//     } catch (error) {
-//       console.log(error);
-//       res.status(500).json(error);
-//     }
-
-
-//   },
+  createTopic: async (req, res) => {
+    let categoryId = req.params.catId
+    let userId = req.params.userId
+    try{
+      let foundCategory = Category.findById()
+      let newTopic = await new Topic({
+        user_id: userId,
+        category_id: categoryId,
+        title: req.body.title,
+      })
+      let savedTopic = newTopic.save()
+      await foundCategory.topics.push(savedTopic)
+      await foundCategory.save()
+    } catch(error){
+      res.status(500).json(error);
+    }
+  },
 
   createPost: async (req, res) => {
     console.log(req.body.id)
-    let id = req.body.id;
-    let post = req.body.post;
-    let title = req.body.title;
-    let image = req.body.image;
+    let topicId = req.params.topicId;
+    let post = req.body.content;
+    let userId = req.params.userId
 
     try { 
-      let foundTopic = await Topic.findById(id);
+      let foundTopic = await Topic.findById(topicId);
       let newPost = await new Post({
-        title: title,
-        post: post,
-        image: image, 
-        user_id: id
+        content: post,
+        user_id: userId,
+        topic_id: topicId
       });
       let savedNewPost = await newPost.save();
       await foundTopic.posts.push(savedNewPost);
@@ -44,19 +44,6 @@ module.exports = {
     }
   },
   
-//   deleteByPost: async (req, res) => {
-//     const id = req.params.postId;
-
-//     try {
-//       let deletedByPost = await Post.findByIdAndRemove(id);
-
-//       res.status(200).json(deletedByPost)
-
-//     } catch (error) {
-//       console.log(error)
-//       res.status(500).json(error);
-//     }
-//   },
 
   deleteByID: async (req, res) => {
     const id = req.params.id;

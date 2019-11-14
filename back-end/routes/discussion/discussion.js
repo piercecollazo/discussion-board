@@ -6,17 +6,17 @@ var categoryController = require('../category/categoryController/categoryControl
 /* GET home page. */
 
 
-router.post('/create-post', discussionController.createPost);
+router.post('/create-post/:topicId/:userId', discussionController.createPost);
 
 router.post('/create-category', categoryController.createCategory);
 
-router.post('/create-topic',  categoryController.createTopic);
+router.post('/create-topic/:catId/:userId',  categoryController.createTopic);
 
-router.get('/get-all-category-by-id/:id', categoryController.getAllCategoryByID);
+router.get('/get-all-category', categoryController.getAllCategory);
 
-router.get('/get-discussion-topic-by-id/:id', categoryController.getDiscussionByTopic);
+router.get('/get-all-topics/:id', categoryController.getDiscussionByTopic);
 
-router.get('/get-all-user-discussionPosts/:id', discussionController.getAllUserDiscussionPosts)
+router.get('/get-all-posts/:id', discussionController.getAllUserDiscussionPosts)
 
 router.delete('/delete-by-id/:id', passport.authenticate('jwt', { session: false }), discussionController.deleteByID)
 

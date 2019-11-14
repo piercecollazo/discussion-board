@@ -1,4 +1,4 @@
-import { AUTH_USER_SUCCESSFUL, AUTH_USER_SIGN_IN, AUTH_USER_LOGOUT } from '../actionTypes/actionTypes';
+import { AUTH_USER_SUCCESSFUL, AUTH_USER_SIGN_IN, AUTH_USER_LOGOUT, CATEGORY_LIST_FILL, TOPIC_LIST_FILL, POST_LIST_FILL, CREATE_TOPIC, CREATE_POST } from '../actionTypes/actionTypes';
 import Axios from '../../lib/Axios';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from '../../lib/setAuthToken'
@@ -24,6 +24,42 @@ export const signin = (userInfo) => async dispatch => {
         dispatch(authUserSignIn(decoded, token))
         return Promise.resolve(decoded);
     } catch (error) {
+        return Promise.reject(error);
+    }
+}
+
+export const categoryList = ()=> async dispatch => {
+    try{
+        let success = await Axios.post('/category/get-all-category')
+        dispatch({
+            type: CATEGORY_LIST_FILL,
+            payload: success
+        })
+    }catch (error){
+        return Promise.reject(error);
+    }
+}
+
+export const topicList = (categoryId)=> async dispatch => {
+    try{
+        let success = await Axios.post(`/category/get-all-topics/${categoryId}`)
+        dispatch({
+            type: TOPIC_LIST_FILL,
+            payload: success
+        })
+    }catch (error){
+        return Promise.reject(error);
+    }
+}
+
+export const postList = (topicId)=> async dispatch => {
+    try{
+        let success = await Axios.post(`/category/get-all-posts/${topicId}`)
+        dispatch({
+            type: POST_LIST_FILL,
+            payload: success
+        })
+    }catch (error){
         return Promise.reject(error);
     }
 }
