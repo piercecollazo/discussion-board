@@ -7,8 +7,8 @@ module.exports = {
   createTopic: async (req, res) => {
     let categoryId = req.params.catId
     let userId = req.params.userId
+    let post = req.body.content
     try{
-      console.log('-----createTopic fired------')
       let foundCategory = await Category.findById(categoryId)
       let newTopic = await new Topic({
         user_id: userId,
@@ -16,8 +16,22 @@ module.exports = {
         title: req.body.title
       })
       let savedTopic = await newTopic.save()
+
+      let newPost = await new Post({
+        post: post,
+        user_id: userId,
+        topic_id: savedTopic._id
+      });
+
       await foundCategory.topics.push(savedTopic)
       await foundCategory.save()
+
+      let foundTopic = await Topic.findById(savedTopic._id);
+      let savedNewPost = await newPost.save();
+      await foundTopic.post.push(savedNewPost);
+      await foundTopic.save(); 
+
+
       res.status(200).json(savedTopic)
     } catch(error){
       res.status(500).json(error);
@@ -33,12 +47,12 @@ module.exports = {
     try { 
       let foundTopic = await Topic.findById(topicId);
       let newPost = await new Post({
-        content: post,
+        post: post,
         user_id: userId,
         topic_id: topicId
       });
       let savedNewPost = await newPost.save();
-      await foundTopic.posts.push(savedNewPost);
+      await foundTopic.post.push(savedNewPost);
       await foundTopic.save(); 
       res.status(200).json(savedNewPost);
     } catch (error) {

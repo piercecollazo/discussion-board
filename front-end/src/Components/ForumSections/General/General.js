@@ -4,11 +4,17 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import TablePagination from "@material-ui/core/TablePagination";
-import { topicList } from '../../../redux/actions/authAction'
+import { topicList, createTopic } from '../../../redux/actions/authAction';
+import Button from '@material-ui/core/Button';
+import FilledInput from '@material-ui/core/FilledInput';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+
 class General extends Component {
   state = {
     loading: true,
     topicName:'',
+    topicPost:'',
     submitted: false
 }
 
@@ -26,7 +32,25 @@ componentDidMount(){
                     loading: false
                 })
             })
-     console.log(this.props.forumData)
+}
+
+handleChange = (event)=>{
+  this.setState({
+      [event.target.name]: event.target.value
+  })
+}
+
+topicSubmit = ()=>{
+  createTopic('5dcc5f223e75d6798807bac3','5dcc5ea1e1d405781c0d57da',this.state.topicName,this.state.topicPost)
+  .then(()=>{
+    this.setState({
+      topicName: '',
+      topicPost: ''
+    })
+  })
+  .catch(error => {
+    console.log(error)
+  })
 }
     render() {
         return (
@@ -40,6 +64,18 @@ componentDidMount(){
                     )
                   })}
                 </List>
+
+                <FormControl variant="filled">
+                    <InputLabel htmlFor="component-filled">New Topic</InputLabel>
+                    <FilledInput id="component-filled" placeholder='Title' name='topicName' />
+                </FormControl>
+
+                <FormControl variant="filled">
+                <FilledInput id="component-filled" placeholder='Post' name='topicPost'  />
+                </FormControl>
+                <Button variant="contained" onClick={this.topicSubmit}>
+                  Post Topic
+                </Button>
 
                 <TablePagination
                   component="nav"

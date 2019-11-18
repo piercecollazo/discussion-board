@@ -16,7 +16,7 @@ router.get('/get-all-category', categoryController.getAllCategory);
 
 router.get('/get-all-topics/:id', categoryController.getTopicsByCategory);
 
-router.get('/get-all-posts/:id', discussionController.getAllUserDiscussionPosts)
+router.get('/get-all-posts/:id', discussionController.getAllPostsByTopic)
 
 router.delete('/delete-by-id/:id', passport.authenticate('jwt', { session: false }), discussionController.deleteByID)
 

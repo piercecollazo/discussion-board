@@ -4,7 +4,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import TablePagination from "@material-ui/core/TablePagination";
-import {postList} from '../../../redux/actions/authAction'
+import {postList, createPost} from '../../../redux/actions/authAction';
+import FilledInput from '@material-ui/core/FilledInput';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 
 
 class Topic extends Component {
@@ -15,7 +19,8 @@ class Topic extends Component {
     }
 
     componentDidMount(){
-        this.props.postList(this.props.location.params.id)
+        console.log(this.props.match.params.id)
+        this.props.postList(this.props.match.params.id)
             .then(()=>{
                 this.setState({
                     loading: false
@@ -29,6 +34,24 @@ class Topic extends Component {
             })
     }
 
+    handleChange = (event)=>{
+        this.setState({
+            post: event.target.value
+        })
+    }
+
+    postSubmit = ()=>{
+        this.props.createPost(this.props.match.params.id, '5dcc5ea1e1d405781c0d57da', this.state.post)
+        .then(()=>{
+            this.setState({
+                post: ''
+            })
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+    }
+
     render() {
         return (
             <div>
@@ -36,11 +59,22 @@ class Topic extends Component {
                   {this.props.forumData.posts.map((item)=>{
                     return(
                     <ListItem key={item._id}>
-                      <ListItemText primary={item.content} />
+                      <ListItemText primary={item.post} />
+                      <Button variant="contained" onClick={this.topicSubmit}>
+                        Post Topic
+                        </Button>
                     </ListItem>
                     )
                   })}
                 </List>
+                
+                <FormControl variant="filled">
+                    <InputLabel htmlFor="component-filled">New Post</InputLabel>
+                    <FilledInput id="component-filled" onChange={this.handleChange}  />
+                    <Button variant="contained" onClick={this.topicSubmit}>
+                        Submit Post
+                    </Button>
+                </FormControl>
 
                 <TablePagination
                   component="nav"

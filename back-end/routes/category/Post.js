@@ -6,7 +6,7 @@ let PostSchema = mongoose.Schema({
     
     user_id: {type: mongoose.SchemaTypes.ObjectId, ref: "User"}, 
     title:{type: String, default:''},
-    post: [{type: mongoose.SchemaTypes.ObjectId, ref: 'Post'}],
+    post: {type: String, default:''},
     image: { type: String, default: ''},
     timestamp: {
         type: String, default: now.format("dddd, MMMM Do YYYY, kk:mm:ss")
