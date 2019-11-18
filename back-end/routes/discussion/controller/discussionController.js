@@ -25,15 +25,14 @@ module.exports = {
 
       await foundCategory.topics.push(savedTopic)
       await foundCategory.save()
-
+      console.log(savedTopic._id)
       let foundTopic = await Topic.findById(savedTopic._id);
       let savedNewPost = await newPost.save();
       await foundTopic.post.push(savedNewPost);
       await foundTopic.save(); 
-
-
       res.status(200).json(savedTopic)
     } catch(error){
+      console.log(error)
       res.status(500).json(error);
     }
   },

@@ -60,9 +60,6 @@ class Topic extends Component {
                     return(
                     <ListItem key={item._id}>
                       <ListItemText primary={item.post} />
-                      <Button variant="contained" onClick={this.topicSubmit}>
-                        Post Topic
-                        </Button>
                     </ListItem>
                     )
                   })}
@@ -71,7 +68,7 @@ class Topic extends Component {
                 <FormControl variant="filled">
                     <InputLabel htmlFor="component-filled">New Post</InputLabel>
                     <FilledInput id="component-filled" onChange={this.handleChange}  />
-                    <Button variant="contained" onClick={this.topicSubmit}>
+                    <Button variant="contained" onClick={this.postSubmit}>
                         Submit Post
                     </Button>
                 </FormControl>
@@ -96,4 +93,4 @@ const mapStateToProps = state => {
     }
   }
   
-  export default connect(mapStateToProps, {postList})(Topic);
+  export default connect(mapStateToProps, {postList, createPost})(Topic);

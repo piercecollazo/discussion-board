@@ -56,9 +56,10 @@ export const topicList = (categoryId)=> async dispatch => {
 export const createTopic = (categoryId, userId, name, post) => async dispatch => {
     try {
         let success = await Axios.post(`/discussion/create-topic/${categoryId}/${userId}`, {title: name, content: post})
+        console.log(success.data)
         dispatch({
             type: CREATE_TOPIC,
-            payload: success
+            payload: success.data
         })
     } catch(error){
         return Promise.reject(error);

@@ -28,7 +28,7 @@ class Sports extends Component {
 }
 
 topicSubmit = ()=>{
-  createTopic('5dcc5f423e75d6798807bac5','5dcc5ea1e1d405781c0d57da',this.state.topicName,this.state.topicPost)
+  this.props.createTopic('5dcc5f423e75d6798807bac5','5dcc5ea1e1d405781c0d57da',this.state.topicName,this.state.topicPost)
   .then(()=>{
     this.setState({
       topicName: '',
@@ -54,11 +54,11 @@ topicSubmit = ()=>{
 
                 <FormControl variant="filled">
                     <InputLabel htmlFor="component-filled">New Topic</InputLabel>
-                    <FilledInput id="component-filled" placeholder='Title' name='topicName' />
+                    <FilledInput id="component-filled" placeholder='Title' name='topicName' onChange={this.handleChange} />
                 </FormControl>
 
                 <FormControl variant="filled">
-                <FilledInput id="component-filled" placeholder='Post' name='topicPost'  />
+                <FilledInput id="component-filled" placeholder='Post' name='topicPost'  onChange={this.handleChange} />
                 </FormControl>
                 <Button variant="contained" onClick={this.topicSubmit}>
                   Post Topic
@@ -83,4 +83,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {topicList})(Sports);
+export default connect(mapStateToProps, {topicList, createTopic})(Sports);
