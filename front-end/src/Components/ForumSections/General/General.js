@@ -19,7 +19,6 @@ class General extends Component {
 }
 
 componentDidMount(){
-  
     this.props.topicList('5dcc5f223e75d6798807bac3')
     .then(()=>{
           this.setState({
@@ -41,7 +40,7 @@ handleChange = (event)=>{
 }
 
 topicSubmit = ()=>{
-  this.props.createTopic('5dcc5f223e75d6798807bac3','5dcc5ea1e1d405781c0d57da',this.state.topicName,this.state.topicPost)
+  this.props.createTopic('5dcc5f223e75d6798807bac3',this.props.authUser.user.id,this.state.topicName,this.state.topicPost)
   .then(()=>{
     this.setState({
       topicName: '',

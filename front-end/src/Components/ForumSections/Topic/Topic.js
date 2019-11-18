@@ -41,7 +41,7 @@ class Topic extends Component {
     }
 
     postSubmit = ()=>{
-        this.props.createPost(this.props.match.params.id, '5dcc5ea1e1d405781c0d57da', this.state.post)
+        this.props.createPost(this.props.match.params.id, this.props.authUser.user.id, this.state.post)
         .then(()=>{
             this.setState({
                 post: ''

@@ -41,7 +41,7 @@ handleChange = (event)=>{
 
 
 topicSubmit = ()=>{
-  this.props.createTopic('5dcc5f423e75d6798807bac5','5dcc5ea1e1d405781c0d57da',this.state.topicName,this.state.topicPost)
+  this.props.createTopic('5dcc5f423e75d6798807bac5',this.props.authUser.user.id,this.state.topicName,this.state.topicPost)
   .then(()=>{
     this.setState({
       topicName: '',
