@@ -11,6 +11,12 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 
 class Politics extends Component {
+  state = {
+    loading: true,
+    topicName:'',
+    topicPost:'',
+    submitted: false
+}
   componentDidMount(){
   
     this.props.topicList('5dcc5f383e75d6798807bac4')
@@ -27,8 +33,14 @@ class Politics extends Component {
             })
      console.log(this.props.forumData)
 }
+handleChange = (event)=>{
+  this.setState({
+      [event.target.name]: event.target.value
+  })
+}
 
 topicSubmit = ()=>{
+  console.log(this.state.topicName)
   this.props.createTopic('5dcc5f383e75d6798807bac4','5dcc5ea1e1d405781c0d57da',this.state.topicName,this.state.topicPost)
   .then(()=>{
     this.setState({

@@ -11,6 +11,12 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 
 class Sports extends Component {
+  state = {
+    loading: true,
+    topicName:'',
+    topicPost:'',
+    submitted: false
+}
   componentDidMount(){
     this.props.topicList('5dcc5f423e75d6798807bac5')
     .then(()=>{
@@ -26,6 +32,13 @@ class Sports extends Component {
             })
      console.log(this.props.forumData)
 }
+
+handleChange = (event)=>{
+  this.setState({
+      [event.target.name]: event.target.value
+  })
+}
+
 
 topicSubmit = ()=>{
   this.props.createTopic('5dcc5f423e75d6798807bac5','5dcc5ea1e1d405781c0d57da',this.state.topicName,this.state.topicPost)
